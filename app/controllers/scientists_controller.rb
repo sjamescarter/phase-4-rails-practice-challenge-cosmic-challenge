@@ -29,7 +29,7 @@ class ScientistsController < ApplicationController
     private
 
     def one_scientist
-        @scientist = Scientists.find(params[:id])
+        @scientist = Scientist.find(params[:id])
     end
 
     def scientist_params

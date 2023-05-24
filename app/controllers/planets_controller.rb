@@ -3,8 +3,35 @@ class PlanetsController < ApplicationController
 
   # GET /planets
   def index
-    planets = Planet.all
+    render json: Planet.all
+  end
 
-    render json: planets
+  def show
+    render json: @planet
+  end
+
+  def create
+    planet = Planet.create!(planet_params)
+    render json: planet, status: :created
+  end
+
+  def update
+    @planet.update!(planet_params) 
+    render json: @planet, status: :accepted
+  end
+
+  def destroy
+    @planet.destroy
+    head :no_content
+  end
+
+  private
+
+  def set_planet
+    @planet = Planet.find(params[:id])
+  end
+
+  def planet_params
+    params.permit(:name, :distance_from_earth, :nearest_star, :image)
   end
 end
